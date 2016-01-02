@@ -55,6 +55,7 @@ if(isset($_GET['rs_id']))
         <tr>
         	<th>No</th>
             <th>Month</th>
+            <th>Student Expense</th>
             <th>Teachers Salary</th>
             <th>Staff Salary</th>
             <th>Bills</th>
@@ -71,7 +72,7 @@ if(isset($_GET['rs_id']))
 	if($key !="")
 		$sql_sel=mysql_query("SElECT * FROM expenses WHERE date like '%$key%' ");
 	else
-        $sql_sel  =mysql_query("SELECT exp_id,date,teachers_salary,staff_salary,bills,extras, (teachers_salary+staff_salary+bills+extras) as tot FROM expenses ORDER BY date DESC;");
+        $sql_sel  =mysql_query("SELECT exp_id,date,student_expense,teachers_salary,staff_salary,bills,extras, (teachers_salary+staff_salary+bills+extras+student_expense) as tot FROM expenses ORDER BY date DESC;");
 		
     $i=0;
     while($row=mysql_fetch_array($sql_sel)){
@@ -81,6 +82,7 @@ if(isset($_GET['rs_id']))
       <tr bgcolor="<?php echo $color?>">
           <td><?php echo $i;?></td>
           <td><?php echo $row['date'];?></td>
+          <td><?php echo $row['student_expense'];?></td>
           <td><?php echo $row['teachers_salary'];?></td>
           <td><?php echo $row['staff_salary'];?></td>
           <td><?php echo $row['bills'];?></td>
@@ -88,7 +90,7 @@ if(isset($_GET['rs_id']))
        
           	
           
-          <td><?php echo $total=$row['teachers_salary']+$row['staff_salary']+$row['bills']+$row['extras'];?></td>
+          <td><?php echo $total=$row['teachers_salary']+$row['staff_salary']+$row['bills']+$row['extras']+$row['student_expense'];?></td>
           <td><a href="?tag=expense_entry&opr=upd&rs_id=<?php echo $row['exp_id'];?>" title="Upate"><img src="picture/update.png" /></a></td>
           <td><a href="?tag=view_expense&opr=del&rs_id=<?php echo $row['exp_id'];?>" title="Delete"><img src="picture/delete.png" /></a></td> 
         </tr>

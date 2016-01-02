@@ -10,6 +10,11 @@ if(isset($_GET['rs_id']))
 if(isset($_POST['btn_sub'])){
 	$bills=$_POST['bills'];
 	$extras=$_POST['extras'];	
+
+$tot_stu = "SELECT SUM(student_expense) as stu_exp FROM stu_tbl;";
+$tot_stu = mysql_query($tot_stu);
+$tot_stu = mysql_fetch_array($tot_stu);
+$tot_stu = $tot_stu['stu_exp'];	
 	
 $tot_teacher = "SELECT SUM(Salary) as teach_sal FROM teacher_tbl WHERE type='teacher';";
 $tot_teacher = mysql_query($tot_teacher);
@@ -22,8 +27,8 @@ $tot_staff	 = mysql_query($tot_staff);
 $tot_staff   = mysql_fetch_array($tot_staff);
 $tot_staff   = $tot_staff['staff_sal'];
 
-$sql_ins	 = mysql_query("INSERT INTO expenses (teachers_salary,staff_salary,bills,extras) 
-					VALUES(										
+$sql_ins	 = mysql_query("INSERT INTO expenses (student_expense,teachers_salary,staff_salary,bills,extras) 
+					VALUES(	'$tot_stu',									
 							'$tot_teacher',
 							'$tot_staff',
 							'$bills',

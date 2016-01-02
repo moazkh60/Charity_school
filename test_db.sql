@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 02, 2016 at 05:52 PM
+-- Generation Time: Jan 02, 2016 at 06:30 PM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `expenses` (
   `exp_id` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `student_expense` int(11) NOT NULL,
   `teachers_salary` int(11) NOT NULL,
   `staff_salary` int(11) NOT NULL,
   `bills` int(11) NOT NULL,
@@ -39,11 +40,13 @@ CREATE TABLE `expenses` (
 -- Dumping data for table `expenses`
 --
 
-INSERT INTO `expenses` (`exp_id`, `date`, `teachers_salary`, `staff_salary`, `bills`, `extras`) VALUES
-(1, '2016-01-12 19:00:00', 54636, 45345, 4324, 0),
-(2, '2015-11-30 19:00:00', 54635, 4354, 5435, 12000),
-(23, '2016-01-02 16:41:59', 5000, 45435, 564, 432),
-(24, '2016-01-02 16:42:19', 5000, 45435, 567, 67567);
+INSERT INTO `expenses` (`exp_id`, `date`, `student_expense`, `teachers_salary`, `staff_salary`, `bills`, `extras`) VALUES
+(1, '2016-01-12 19:00:00', 54345, 54636, 45345, 4324, 0),
+(2, '2015-11-30 19:00:00', 54355, 54635, 4354, 5435, 12000),
+(23, '2016-01-02 16:41:59', 65767, 5000, 45435, 564, 432),
+(24, '2016-01-02 16:42:19', 3123, 5000, 45435, 567, 67567),
+(26, '2016-01-02 17:25:38', 571332, 5000, 45435, 435, 4535),
+(27, '2016-01-02 17:26:02', 571332, 5000, 45435, 234, 342);
 
 -- --------------------------------------------------------
 
@@ -112,7 +115,7 @@ CREATE TABLE `stu_tbl` (
 
 INSERT INTO `stu_tbl` (`roll_no`, `stu_id`, `f_name`, `l_name`, `gender`, `dob`, `address`, `phone`, `email`, `student_expense`) VALUES
 (2116, 1, 'Saif-ur-', 'Rehman', 'male', '1991-03-01', 'Lahore', '56456654654', 'saif-ur@gmail.com', 564565),
-(2115, 2, 'Jazib', 'Bashir', 'Male', '1990-05-04', '  Lahore', '03054038588', 'jazib@yahoo.com', 0),
+(2115, 2, 'Jazib', 'Bashir', 'male', '1990-05-04', '  Lahore', '03054038588', 'jazib@yahoo.com', 6767),
 (2103, 3, 'Tahir', 'Awan', 'Male', '1988-05-05', '   Lahore', '03054038588', 'tahir@gmail.com   ', 0),
 (2110, 4, 'Abdul', 'Jabbar', 'Male', '1989-06-06', 'Lahore', '03054038588 ', 'jabbar@gmail.com', 0),
 (435, 5, 'gfdgfdg', 'gsfgdf', 'male', '2016-01-21', 'fdsfdf', '435435345435', 'fdggfsdg@gmail.com', 0);
@@ -247,7 +250,7 @@ ALTER TABLE `users_tbl`
 -- AUTO_INCREMENT for table `expenses`
 --
 ALTER TABLE `expenses`
-  MODIFY `exp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `exp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `facuties_tbl`
 --
