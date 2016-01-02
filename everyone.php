@@ -100,7 +100,18 @@
                     </li>
                 </ul>
               </li>
-              <li><a href="?tag=View_Expenses">Expenses</a></li>
+              
+               <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Expenses <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="everyone.php?tag=expense_entry">Expense Entry</a>
+                    </li>
+                    <li>
+                        <a href="everyone.php?tag=view_expense">View Expense</a>
+                    </li>
+                </ul>
+              </li>
               <!-- <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Contact <b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -148,7 +159,7 @@
           <a href="everyone.php?tag=susers_entry">Users Entry</a>
       </li>
       <li>
-          <a href="everyone.php?tag=View_Expenses">Expenses</a>
+          <a href="everyone.php?tag=View_Expenses">Expense Entry</a>
       </li>
         </ul>
 </div>
@@ -170,6 +181,8 @@
                   include("Subject_Entry.php");
               elseif($tag=="faculties_entry")
                   include("Faculties_Entry.php");
+			  elseif($tag=="expense_entry")
+                  include("Expense_Entry.php");
               elseif($tag=="susers_entry")
                   include("Users_Entry.php"); 
               elseif($tag=="view_students")

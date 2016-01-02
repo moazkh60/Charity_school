@@ -9,7 +9,7 @@ if(isset($_GET['rs_id']))
 	
 	if($opr=="del")
 {
-	$del_sql=mysql_query("DELETE FROM sub_tbl WHERE sub_id=$id");
+	$del_sql=mysql_query("DELETE FROM expenses WHERE exp_id=$id");
 	if($del_sql) {
             echo "<div>"
                 . "<div class='alert alert-success col-md-6 col-md-offset-3'>"
@@ -31,7 +31,7 @@ if(isset($_GET['rs_id']))
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>::. Build Bright University .::</title>
+<title>::. Charity School Management System .::</title>
 <link rel="stylesheet" type="text/css" href="css/style_view.css" />
 </head>
 
@@ -44,7 +44,7 @@ if(isset($_GET['rs_id']))
 <form role="form" data-toggle="validator" method="post" class="form-horizontal">
     <div class="form-group">
         <div class="col-md-9 col-md-offset-1     col-xs-9 col-sm-10">
-            <input type="text" class="form-control" name="searchtxt" Placeholder="Enter Subject name for search" autocomplete="off"/></div>
+            <input type="text" class="form-control" name="searchtxt" Placeholder="Enter Date for search" autocomplete="off"/></div>
         <input type="submit" name="btnsearch" value="Search" class="btn btn-info"/>
     </div>
 </form>
@@ -53,6 +53,7 @@ if(isset($_GET['rs_id']))
 	<form method="post">
         <table class="table table-bordered">
         <tr>
+        	<th>No</th>
             <th>Month</th>
             <th>Teachers Salary</th>
             <th>Staff Salary</th>
@@ -68,9 +69,9 @@ if(isset($_GET['rs_id']))
 		$key=$_POST['searchtxt'];
 	
 	if($key !="")
-		$sql_sel=mysql_query("SElECT * FROM sub_tbl WHERE sub_name  like '%$key%' ");
+		$sql_sel=mysql_query("SElECT * FROM expenses WHERE date like '%$key%' ");
 	else
-        $sql_sel=mysql_query("SELECT * FROM sub_tbl");
+        $sql_sel  =mysql_query("SELECT exp_id,date,teachers_salary,staff_salary,bills,extras, (teachers_salary+staff_salary+bills+extras) as tot FROM expenses ORDER BY date DESC;");
 		
     $i=0;
     while($row=mysql_fetch_array($sql_sel)){
@@ -78,13 +79,18 @@ if(isset($_GET['rs_id']))
     $color=($i%2==0)?"lightblue":"white";
     ?>
       <tr bgcolor="<?php echo $color?>">
-            <td><?php echo $i;?></td>
-          <td><?php echo $row['sub_name'];?></td>
-          <td><?php echo $row['semester'];?></td>
-          <td><?php echo $row['faculties_id'];?></td>
-            <td><?php echo $row['teacher_id'];?></td>
-            <td align="center"><a href="?tag=subject_entry&opr=upd&rs_id=<?php echo $row['sub_id'];?>" title="Upate"><img src="picture/update.png" /></a></td>
-            <td align="center"><a href="?tag=view_subjects&opr=del&rs_id=<?php echo $row['sub_id'];?>" title="Delete"><img src="picture/delete.png" /></a></td>
+          <td><?php echo $i;?></td>
+          <td><?php echo $row['date'];?></td>
+          <td><?php echo $row['teachers_salary'];?></td>
+          <td><?php echo $row['staff_salary'];?></td>
+          <td><?php echo $row['bills'];?></td>
+          <td><?php echo $row['extras'];?></td>
+       
+          	
+          
+          <td><?php echo $total=$row['teachers_salary']+$row['staff_salary']+$row['bills']+$row['extras'];?></td>
+          <td><a href="?tag=expense_entry&opr=upd&rs_id=<?php echo $row['exp_id'];?>" title="Upate"><img src="picture/update.png" /></a></td>
+          <td><a href="?tag=view_expense&opr=del&rs_id=<?php echo $row['exp_id'];?>" title="Delete"><img src="picture/delete.png" /></a></td> 
         </tr>
     <?php	
     }
